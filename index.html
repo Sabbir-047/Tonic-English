@@ -26,9 +26,9 @@
 
 <body>
     <!-- header section -->
-    <header class="bg-base-100">
+    <header class="">
         <!-- navbar section -->
-        <section class="shadow-sm shadow-green-400">
+        <section class="shadow-sm bg-base-100 shadow-green-400">
             <nav class="max-w-5/6 mx-auto py-5 z-10 sticky">
                 <div class="flex justify-between space-y-2 md:space-y-0">
                     <div class="text-center">
@@ -67,18 +67,23 @@
 
 
         <!-- banner section -->
-        <section class="max-w-5/6 mx-auto py-5">
+        <section class="max-w-5/6 mx-auto py-16">
             <div class="min-h-screen">
-                <div class="hero-content flex-col lg:flex-row-reverse">
-                    <img src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.webp"
-                        class="max-w-sm rounded-lg shadow-2xl" />
-                    <div>
-                        <h1 class="text-5xl font-bold">Box Office News!</h1>
+                <div class="flex flex-col lg:flex-row-reverse justify-between items-center space-y-12">
+                    <img src="assets/hero.png" class="max-w-full md:max-w-lg rounded-lg shadow-2xl" />
+                    <div class="max-w-1/2">
+                        <h1 class="text-5xl font-bold"><span class="text-lime-500">English</span> is fun!</h1>
                         <p class="py-6">
-                            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-                            quasi. In deleniti eaque aut repudiandae et a id nisi.
+                            আজ থেকেই আপনার ভাষা শেখার যাত্রা শুরু করুন। আপনি যদি নতুন হন অথবা আপনার দক্ষতা বাড়াতে চান,
+                            আমাদের Interactive Lessons আপনাকে নিয়ে যাবে অন্য একটি Level এ
                         </p>
-                        <button class="btn btn-primary">Get Started</button>
+                        <div class="space-y-3">
+                            <fieldset class="fieldset space-y-3">
+                                <input type="text" class="input" placeholder="Type Your Name" />
+                                <input type="password" class="input" placeholder="Password" />
+                            </fieldset>
+                            <button class="btn btn-success">Get Started</button>
+                        </div>
                     </div>
                 </div>
             </div>
