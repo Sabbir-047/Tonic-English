@@ -25,20 +25,64 @@
 </head>
 
 <body>
-    <header class="bg-base-100 shadow-sm">
-        <nav class="max-w-5/6 mx-auto py-5">
-            <div class="flex flex-col md:flex-row justify-between space-y-2 md:space-y-0">
-                <div class="text-center">
-                    <a class="btn btn-ghost text-xl font-semibold font-bangla">টনিক <span><img width="41px" height="40px"
-                                src="./assets/test-tube.png" alt="logo"></span> English </a>
+    <!-- header section -->
+    <header class="bg-base-100">
+        <!-- navbar section -->
+        <section class="shadow-sm shadow-green-400">
+            <nav class="max-w-5/6 mx-auto py-5 z-10 sticky">
+                <div class="flex justify-between space-y-2 md:space-y-0">
+                    <div class="text-center">
+                        <a class="btn btn-ghost text-xl font-semibold font-bangla">টনিক <span><img width="41px"
+                                    height="40px" src="./assets/test-tube.png" alt="logo"></span> English </a>
+                    </div>
+                    <div class="hidden md:block">
+                        <ul class="menu menu-horizontal px-1 space-x-3">
+                            <li><a class="btn btn-outline btn-success text-sm font-semibold"><i
+                                        class="fa-solid fa-circle-question"></i> FAQ</a></li>
+                            <li><a class="btn btn-outline btn-success text-sm font-semibold"><i
+                                        class="fa-solid fa-book-open"></i>
+                                    Learn</a></li>
+                            <li><a class="btn btn-outline btn-success text-sm font-semibold"> <i
+                                        class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown md:hidden">
+                        <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6h16M4 12h16M4 18h7" />
+                            </svg>
+                        </div>
+                        <ul tabindex="-1"
+                            class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                            <li><a>FAQ</a></li>
+                            <li><a>Learn</a></li>
+                            <li><a>Logout</a></li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="space-x-3 text-center">
-                    <a class="btn btn-outline btn-success text-sm font-semibold"><i class="fa-solid fa-circle-question"></i> FAQ</a>
-                    <a class="btn btn-outline btn-success text-sm font-semibold"><i class="fa-solid fa-book-open"></i> Learn</a>
-                    <a class="btn btn-outline btn-success text-sm font-semibold"> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
+            </nav>
+        </section>
+
+
+        <!-- banner section -->
+        <section class="max-w-5/6 mx-auto py-5">
+            <div class="min-h-screen">
+                <div class="hero-content flex-col lg:flex-row-reverse">
+                    <img src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.webp"
+                        class="max-w-sm rounded-lg shadow-2xl" />
+                    <div>
+                        <h1 class="text-5xl font-bold">Box Office News!</h1>
+                        <p class="py-6">
+                            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
+                            quasi. In deleniti eaque aut repudiandae et a id nisi.
+                        </p>
+                        <button class="btn btn-primary">Get Started</button>
+                    </div>
                 </div>
             </div>
-        </nav>
+        </section>
     </header>
 
 
