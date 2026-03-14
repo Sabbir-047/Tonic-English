@@ -5,13 +5,28 @@ const loadLessons = () => {
         .then((datas) => displayLessons(datas.data));
 };
 
+// button toggling remover active
+const removeActive = () =>{
+    const lessonBtns = document.querySelectorAll(".lesson-btn");
+    // console.log(lessonBtns);
+    lessonBtns.forEach(btn => btn.classList.remove("activeBtn"));
+}
+
+// load buttons with levels design
 const loadLevelWord = (id) => {
     const url = `https://openapi.programming-hero.com/api/level/${id}`;
     fetch(url)
         .then((res) => res.json())
-        .then((datas) => displayLevelWords(datas.data));
+        .then((datas) => {
+            removeActive();
+            const clickedBtn = document.getElementById(`lesson-btn-${id}`);
+            // console.log(clickedBtn);
+            clickedBtn.classList.add("activeBtn");
+            displayLevelWords(datas.data)
+        });
 };
 
+// display all the words in the card
 const displayLevelWords = (words) => {
     const wordContainer = document.getElementById("word-section");
     wordContainer.innerHTML = "";
@@ -31,7 +46,7 @@ const displayLevelWords = (words) => {
     }
 
     words.forEach((word) => {
-        console.log(word);
+        // console.log(word);
         const card = document.createElement("div");
         card.innerHTML = `
             <div class="space-y-6 bg-white p-14 rounded-2xl shadow-sm h-full">
@@ -39,7 +54,7 @@ const displayLevelWords = (words) => {
                 <p class="font-bangla text-xl font-medium">Meaning/Pronounciation</p>
                 <h2 class="font-bangla text-3xl font-bold">${word.meaning ? word.meaning : "No meaning found"}/${word.pronunciation ? word.pronunciation : 'No pronunciation found'}</h2>
                 <div class="flex justify-between">
-                    <button class="btn rounded-xl">
+                    <button onclick = "my_modal_5.showModal()" class="btn rounded-xl">
                         <i class="fa-solid fa-circle-info"></i>
                     </button>
                     <button class="btn rounded-xl">
@@ -57,15 +72,14 @@ const displayLessons = (lessons) => {
     btnContainer.innerHTML = "";
 
     lessons.forEach((lesson) => {
-        console.log(lesson);
+        // console.log(lesson);
         const btn = document.createElement("div");
         // btn.classList.add('btn btn-outline btn-success');
         btn.innerHTML = `
-            <button onclick = "loadLevelWord(${lesson.level_no})">
+            <button id = "lesson-btn-${lesson.level_no}" onclick = "loadLevelWord(${lesson.level_no})" class = "btn btn-outline btn-success lesson-btn">
                 <i class="fa-solid fa-book-open"></i>Lesson - ${lesson.level_no}
             </button>
         `;
-        btn.classList.add("btn", "btn-outline", "btn-success");
         btnContainer.appendChild(btn);
     });
 };
