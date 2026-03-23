@@ -6,11 +6,11 @@ const loadLessons = () => {
 };
 
 // button toggling remover active
-const removeActive = () =>{
+const removeActive = () => {
     const lessonBtns = document.querySelectorAll(".lesson-btn");
     // console.log(lessonBtns);
-    lessonBtns.forEach(btn => btn.classList.remove("activeBtn"));
-}
+    lessonBtns.forEach((btn) => btn.classList.remove("activeBtn"));
+};
 
 // load buttons with levels design
 const loadLevelWord = (id) => {
@@ -22,10 +22,55 @@ const loadLevelWord = (id) => {
             const clickedBtn = document.getElementById(`lesson-btn-${id}`);
             // console.log(clickedBtn);
             clickedBtn.classList.add("activeBtn");
-            displayLevelWords(datas.data)
+            displayLevelWords(datas.data);
         });
 };
 
+/*
+id
+: 
+3
+level
+: 
+2
+meaning
+: 
+"সতর্ক"
+partsOfSpeech
+: 
+"adjective"
+points
+: 
+2
+pronunciation
+: 
+"কশাস"
+sentence
+: 
+"Be cautious while crossing the road."
+synonyms
+: 
+(3) ['careful', 'alert', 'watchful']
+word
+: 
+"Cautious"
+*/
+// load word details
+const loadWordDetails = async (id) => {
+    const url = `https://openapi.programming-hero.com/api/word/${id}`;
+    // console.log(url);
+    const response = await fetch(url);
+    const details = await response.json();
+    displayWordDetails(details.data);
+    detailsContainer.innerHTML = `
+    
+    `
+};
+
+const displayWordDetails = (details) => {
+    console.log(details);
+    const detailsContainer = document.getElementById('details-container');
+}
 // display all the words in the card
 const displayLevelWords = (words) => {
     const wordContainer = document.getElementById("word-section");
@@ -50,11 +95,11 @@ const displayLevelWords = (words) => {
         const card = document.createElement("div");
         card.innerHTML = `
             <div class="space-y-6 bg-white p-14 rounded-2xl shadow-sm h-full">
-                <h2 class="font-bangla text-3xl font-bold">${word.word ? word.word : 'No Word found'}</h2>
+                <h2 class="font-bangla text-3xl font-bold">${word.word ? word.word : "No Word found"}</h2>
                 <p class="font-bangla text-xl font-medium">Meaning/Pronounciation</p>
-                <h2 class="font-bangla text-3xl font-bold">${word.meaning ? word.meaning : "No meaning found"}/${word.pronunciation ? word.pronunciation : 'No pronunciation found'}</h2>
+                <h2 class="font-bangla text-3xl font-bold">${word.meaning ? word.meaning : "No meaning found"}/${word.pronunciation ? word.pronunciation : "No pronunciation found"}</h2>
                 <div class="flex justify-between">
-                    <button onclick = "my_modal_5.showModal()" class="btn rounded-xl">
+                    <button onclick = "loadWordDetails(${word.id})" class="btn rounded-xl">
                         <i class="fa-solid fa-circle-info"></i>
                     </button>
                     <button class="btn rounded-xl">
