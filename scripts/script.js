@@ -1,3 +1,21 @@
+// create elements for synonyms
+const createElements = (arr) => {
+    // console.log(arr);
+    const htmlElements = arr.map((el) => `<span class = "btn"> ${el} </span>`);
+    return htmlElements.join("");
+};
+
+// loading spinner manager
+const manageSpinner = (status) => {
+    if ((status == true)) {
+        document.getElementById("spinner").classList.remove("hidden");
+        document.getElementById("word-section").classList.add("hidden");
+    } else {
+        document.getElementById("word-section").classList.remove("hidden");
+        document.getElementById("spinner").classList.add("hidden");
+    }
+};
+
 const loadLessons = () => {
     let url = "https://openapi.programming-hero.com/api/levels/all";
     fetch(url)
@@ -14,6 +32,7 @@ const removeActive = () => {
 
 // load buttons with levels design
 const loadLevelWord = (id) => {
+    manageSpinner(true)
     const url = `https://openapi.programming-hero.com/api/level/${id}`;
     fetch(url)
         .then((res) => res.json())
@@ -64,13 +83,32 @@ const loadWordDetails = async (id) => {
     displayWordDetails(details.data);
     detailsContainer.innerHTML = `
     
-    `
+    `;
 };
 
 const displayWordDetails = (details) => {
     console.log(details);
-    const detailsContainer = document.getElementById('details-container');
-}
+    const detailsContainer = document.getElementById("details-container");
+    detailsContainer.innerHTML = `
+    <div class="">
+                        <h2 class="text-2xl font-bold">${details.word} ( 🎙️ :${details.pronunciation})</h2>
+                    </div>
+                    <div class="">
+                        <h2 class="text-2xl font-bold">Meaning</h2>
+                        <p>${details.meaning}</p>
+                    </div>
+                    <div class="">
+                        <h2 class="text-2xl font-bold">Example</h2>
+                        <p>${details.sentence}</p>
+                    </div>
+                    <div class="">
+                        <h2 class="text-2xl font-bold">সমার্থক শব্দ গুলো</h2>
+                        <div class ="">${createElements(details.synonyms)}</div>
+                    </div>
+    
+    `;
+    document.getElementById("my_modal_5").showModal();
+};
 // display all the words in the card
 const displayLevelWords = (words) => {
     const wordContainer = document.getElementById("word-section");
@@ -87,6 +125,7 @@ const displayLevelWords = (words) => {
             <h2 class="font-bangla text-4xl font-medium">নেক্সট Lesson এ যান</h2>
         </div>
         `;
+        manageSpinner(false);
         return;
     }
 
@@ -94,7 +133,7 @@ const displayLevelWords = (words) => {
         // console.log(word);
         const card = document.createElement("div");
         card.innerHTML = `
-            <div class="space-y-6 bg-white p-14 rounded-2xl shadow-sm h-full">
+            <div class="space-y-6 bg-white p-14 md:p-4 lg:p-6 rounded-2xl shadow-sm h-full">
                 <h2 class="font-bangla text-3xl font-bold">${word.word ? word.word : "No Word found"}</h2>
                 <p class="font-bangla text-xl font-medium">Meaning/Pronounciation</p>
                 <h2 class="font-bangla text-3xl font-bold">${word.meaning ? word.meaning : "No meaning found"}/${word.pronunciation ? word.pronunciation : "No pronunciation found"}</h2>
@@ -110,6 +149,7 @@ const displayLevelWords = (words) => {
         `;
         wordContainer.appendChild(card);
     });
+    manageSpinner(false);
 };
 
 const displayLessons = (lessons) => {
