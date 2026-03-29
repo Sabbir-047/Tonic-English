@@ -5,9 +5,16 @@ const createElements = (arr) => {
     return htmlElements.join("");
 };
 
+// pronounce word
+function pronounceWord(word) {
+    const utterance = new SpeechSynthesisUtterance(word);
+    utterance.lang = "en-EN"; // English
+    window.speechSynthesis.speak(utterance);
+}
+
 // loading spinner manager
 const manageSpinner = (status) => {
-    if ((status == true)) {
+    if (status == true) {
         document.getElementById("spinner").classList.remove("hidden");
         document.getElementById("word-section").classList.add("hidden");
     } else {
@@ -32,7 +39,7 @@ const removeActive = () => {
 
 // load buttons with levels design
 const loadLevelWord = (id) => {
-    manageSpinner(true)
+    manageSpinner(true);
     const url = `https://openapi.programming-hero.com/api/level/${id}`;
     fetch(url)
         .then((res) => res.json())
@@ -45,35 +52,6 @@ const loadLevelWord = (id) => {
         });
 };
 
-/*
-id
-: 
-3
-level
-: 
-2
-meaning
-: 
-"সতর্ক"
-partsOfSpeech
-: 
-"adjective"
-points
-: 
-2
-pronunciation
-: 
-"কশাস"
-sentence
-: 
-"Be cautious while crossing the road."
-synonyms
-: 
-(3) ['careful', 'alert', 'watchful']
-word
-: 
-"Cautious"
-*/
 // load word details
 const loadWordDetails = async (id) => {
     const url = `https://openapi.programming-hero.com/api/word/${id}`;
@@ -86,6 +64,7 @@ const loadWordDetails = async (id) => {
     `;
 };
 
+// display word details
 const displayWordDetails = (details) => {
     console.log(details);
     const detailsContainer = document.getElementById("details-container");
@@ -141,7 +120,7 @@ const displayLevelWords = (words) => {
                     <button onclick = "loadWordDetails(${word.id})" class="btn rounded-xl">
                         <i class="fa-solid fa-circle-info"></i>
                     </button>
-                    <button class="btn rounded-xl">
+                    <button onclick = "pronounceWord('${word.word}')" class="btn rounded-xl">
                         <i class="fa-solid fa-volume-high"></i>
                     </button>
                 </div>
@@ -152,6 +131,7 @@ const displayLevelWords = (words) => {
     manageSpinner(false);
 };
 
+// display lessons
 const displayLessons = (lessons) => {
     const btnContainer = document.getElementById("button-container");
     btnContainer.innerHTML = "";
@@ -169,3 +149,23 @@ const displayLessons = (lessons) => {
     });
 };
 loadLessons();
+
+// search words
+document.getElementById("btn-search").addEventListener("click", () => {
+    removeActive();
+    const inputWord = document.getElementById("input-search");
+    const searchValue = inputWord.value.trim().toLowerCase();
+
+    const url = `https://openapi.programming-hero.com/api/words/all`;
+    fetch(url)
+        .then((res) => res.json())
+        .then((words) => {
+            const allWords = words.data;
+            // console.log(allWords);
+            const filterWords = allWords.filter((word) =>
+                word.word.toLowerCase().includes(searchValue),
+            );
+            // console.log(filterWords);
+            displayLevelWords(filterWords);
+        });
+});
