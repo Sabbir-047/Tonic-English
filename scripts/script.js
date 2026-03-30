@@ -65,26 +65,27 @@ const loadWordDetails = async (id) => {
 };
 
 // display word details
-const displayWordDetails = (details) => {
+const displayWordDetails = (details) => { 
     console.log(details);
     const detailsContainer = document.getElementById("details-container");
     detailsContainer.innerHTML = `
-    <div class="">
-                        <h2 class="text-2xl font-bold">${details.word} ( 🎙️ :${details.pronunciation})</h2>
-                    </div>
-                    <div class="">
-                        <h2 class="text-2xl font-bold">Meaning</h2>
-                        <p>${details.meaning}</p>
-                    </div>
-                    <div class="">
-                        <h2 class="text-2xl font-bold">Example</h2>
-                        <p>${details.sentence}</p>
-                    </div>
-                    <div class="">
-                        <h2 class="text-2xl font-bold">সমার্থক শব্দ গুলো</h2>
-                        <div class ="">${createElements(details.synonyms)}</div>
-                    </div>
-    
+        <div class="">
+            <h2 class="text-2xl font-bold">${details.word} ( 🎙️ :${details.pronunciation})</h2>
+        </div>
+        <div class="">
+            <h2 class="text-2xl font-bold">Meaning</h2>
+            <p>${details.meaning}</p>
+        </div>
+        <div class="">
+            <h2 class="text-2xl font-bold">Example</h2>
+            <p>${details.sentence}</p>
+        </div>
+        <div class="">
+            <h2 class="text-2xl font-bold">সমার্থক শব্দ গুলো</h2>
+            <div class ="">
+                ${createElements(details.synonyms)}
+            </div>
+        </div>
     `;
     document.getElementById("my_modal_5").showModal();
 };
