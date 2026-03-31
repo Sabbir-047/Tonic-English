@@ -1,6 +1,6 @@
 // create elements for synonyms
 const createElements = (arr) => {
-    // console.log(arr);
+    // console.log(arr);  // we have used map bcz it'll return all the elements
     const htmlElements = arr.map((el) => `<span class = "btn"> ${el} </span>`);
     return htmlElements.join("");
 };
@@ -45,6 +45,7 @@ const loadLevelWord = (id) => {
         .then((res) => res.json())
         .then((datas) => {
             removeActive();
+            // we are cathing specific id for active toggle
             const clickedBtn = document.getElementById(`lesson-btn-${id}`);
             // console.log(clickedBtn);
             clickedBtn.classList.add("activeBtn");
@@ -141,11 +142,13 @@ const displayLessons = (lessons) => {
         // console.log(lesson);
         const btn = document.createElement("div");
         // btn.classList.add('btn btn-outline btn-success');
+        // we are adding id here because we want to show active classes
         btn.innerHTML = `
             <button id = "lesson-btn-${lesson.level_no}" onclick = "loadLevelWord(${lesson.level_no})" class = "btn btn-outline btn-success lesson-btn">
                 <i class="fa-solid fa-book-open"></i>Lesson - ${lesson.level_no}
             </button>
         `;
+        // we have added lesson-btn class in every button so that we can remove and add toggling functions
         btnContainer.appendChild(btn);
     });
 };
